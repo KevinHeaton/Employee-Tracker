@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../config/connection');
+require('console.table');
 
-
-router.get('/departments', (req, res) => {
+// get all departments
+const departments = router.get('/departments', (req, res) => {
   const sql = `SELECT * FROM department`;
   db.query(sql, (err, rows) => {
     if (err) {
@@ -17,6 +18,10 @@ router.get('/departments', (req, res) => {
   });
 });
 
+//console.table([departments]);
+
+
+// get department by id
 router.get('/department/:id', (req, res) => {
   const sql = `SELECT * FROM department WHERE id = ?`;
   const params = [req.params.id];
@@ -33,3 +38,4 @@ router.get('/department/:id', (req, res) => {
 });
 
 module.exports = router;
+module.exports = departments;

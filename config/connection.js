@@ -1,14 +1,18 @@
 // Import the Sequalize constructor from the library
-const Sequalize = require('sequelize');
-
+const mysql = require('mysql2');
+// const until = require('until');
 require('dotenv').config();
 
 // create connection to our database, pass in your MySQL information for username and password
-const sequelize = new Sequalize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PW, {
+const connection = mysql.createConnection({
   host: 'localhost',
-  dialect: 'mysql',
-  database: 'employees',
-  port: 3306
+  user: process.env.DB_USER,
+  password: process.env.DB_PW,
+  database: process.env.DB_NAME,
+  port: '3306'
 });
 
-module.exports = sequelize;
+connection.connect();
+
+
+module.exports = connection;
